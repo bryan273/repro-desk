@@ -1,0 +1,39 @@
+{
+  "status": "success",
+  "results": [
+    {
+      "status": "success",
+      "filename": "hero-researcher.jpg",
+      "url": "https://mgx-backend-cdn.metadl.com/generate/images/1614411/2026-10-24/zay3e3ycalsq/hero-researcher.png",
+      "path": "https://mgx-backend-cdn.metadl.com/generate/images/1614411/2026-10-24/zay3e3ycalsq/hero-researcher.png",
+      "absolute_path": "https://mgx-backend-cdn.metadl.com/generate/images/1614411/2026-10-24/zay3e3ycalsq/hero-researcher.png",
+      "requested_size": "1024x1280",
+      "size": "1024x1280",
+      "size_adjustments": []
+    },
+    {
+      "status": "success",
+      "filename": "report-bench.jpg",
+      "url": "https://mgx-backend-cdn.metadl.com/generate/images/1614411/2026-10-24/zay3fiycalsa/report-bench.png",
+      "path": "https://mgx-backend-cdn.metadl.com/generate/images/1614411/2026-10-24/zay3fiycalsa/report-bench.png",
+      "absolute_path": "https://mgx-backend-cdn.metadl.com/generate/images/1614411/2026-10-24/zay3fiycalsa/report-bench.png",
+      "requested_size": "1024x768",
+      "size": "1024x768",
+      "size_adjustments": []
+    },
+    {
+      "status": "success",
+      "filename": "team-review.jpg",
+      "url": "https://mgx-backend-cdn.metadl.com/generate/images/1614411/2026-10-24/zay3fvycalrq/team-review.png",
+      "path": "https://mgx-backend-cdn.metadl.com/generate/images/1614411/2026-10-24/zay3fvycalrq/team-review.png",
+      "absolute_path": "https://mgx-backend-cdn.metadl.com/generate/images/1614411/2026-10-24/zay3fvycalrq/team-review.png",
+      "requested_size": "1280x720",
+      "size": "1280x720",
+      "size_adjustments": []
+    }
+  ],
+  "success_count": 3,
+  "failed_count": 0,
+  "running_count": 0,
+  "message": "Generated 3/3 images total"
+}

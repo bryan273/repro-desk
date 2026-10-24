@@ -1,0 +1,35 @@
+{
+    "title": "repro_requests",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "integer",
+            "autoincrement": true,
+            "primary_key": true
+        },
+        "paper_link": {
+            "type": "string"
+        },
+        "claim": {
+            "type": "string",
+            "format": "text"
+        },
+        "email": {
+            "type": "string"
+        },
+        "language": {
+            "type": "string"
+        },
+        "plan": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "paper_link",
+        "claim",
+        "email"
+    ]
+}
