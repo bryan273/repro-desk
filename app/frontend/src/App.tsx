@@ -8,6 +8,7 @@ import AuthCallback from './pages/AuthCallback';
 import AuthError from './pages/AuthError';
 import Admin from './pages/Admin';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 // MODULE_IMPORTS_START
 // MODULE_IMPORTS_END
 
@@ -30,12 +31,14 @@ const App = () => (
     {/* MODULE_PROVIDERS_START */}
     {/* MODULE_PROVIDERS_END */}
     <TooltipProvider>
-      <LanguageProvider>
-        <Toaster />
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
-      </LanguageProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <Toaster />
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </LanguageProvider>
+      </ThemeProvider>
     </TooltipProvider>
     {/* MODULE_PROVIDERS_CLOSE */}
   </QueryClientProvider>

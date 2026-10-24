@@ -1,0 +1,26 @@
+{
+    "title": "site_events",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "integer",
+            "autoincrement": true,
+            "primary_key": true
+        },
+        "event_type": {
+            "type": "string"
+        },
+        "session_id": {
+            "type": "string"
+        },
+        "language": {
+            "type": "string"
+        },
+        "path": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "event_type"
+    ]
+}

@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ArrowLeft, ExternalLink, Loader2, LogOut, RefreshCw, UserRound } from 'lucide-react';
 import { toast } from 'sonner';
-import { LangToggle, Wordmark } from '@/components/SiteHeader';
+import { LangToggle, ThemeToggle, Wordmark } from '@/components/SiteHeader';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { client, errorMessage, type ReproRequest, type RequestStatus } from '@/lib/client';
+import { client, errorMessage, type FunnelStats, type ReproRequest, type RequestStatus } from '@/lib/client';
 
 type AuthState = 'loading' | 'authenticated' | 'anonymous';
 type LoadState = 'idle' | 'loading' | 'ready' | 'error' | 'forbidden';
@@ -27,6 +27,8 @@ export default function Admin() {
   const [page, setPage] = useState(0);
   const [filter, setFilter] = useState<RequestStatus | ''>('');
   const [savingId, setSavingId] = useState<number | null>(null);
+  const [stats, setStats] = useState<FunnelStats | null>(null);
+  const [statsError, setStatsError] = useState(false);
 
   useEffect(() => {
     client.auth
@@ -35,9 +37,20 @@ export default function Admin() {
       .catch(() => setAuth('anonymous'));
   }, []);
 
+  const loadStats = useCallback(async () => {
+    try {
+      const res = await client.apiCall.invoke({ url: '/api/v1/entities/site_events/stats', method: 'GET', data: {} });
+      setStats(res.data as FunnelStats);
+      setStatsError(false);
+    } catch {
+      setStatsError(true);
+    }
+  }, []);
+
   const load = useCallback(async () => {
     setState('loading');
     setError('');
+    loadStats();
     try {
       const data: Record<string, string | number> = { skip: page * PAGE_SIZE, limit: PAGE_SIZE };
       if (filter) data.status = filter;
@@ -58,7 +71,7 @@ export default function Admin() {
         setState('error');
       }
     }
-  }, [page, filter, a.error]);
+  }, [page, filter, a.error, loadStats]);
 
   useEffect(() => {
     if (auth === 'authenticated') load();
@@ -92,7 +105,7 @@ export default function Admin() {
   );
 
   return (
-    <div className="min-h-screen bg-muted/40">
+    <div className="min-h-screen overflow-x-clip bg-muted/40">
       <header className="border-b border-border bg-background">
         <div className="mx-auto flex h-[72px] max-w-[1320px] items-center justify-between gap-4 px-6 lg:px-10">
           <div className="flex items-center gap-6">
@@ -102,8 +115,9 @@ export default function Admin() {
               {a.back}
             </a>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             <LangToggle />
+            <ThemeToggle />
             {auth === 'authenticated' && (
               <button
                 type="button"
@@ -175,6 +189,30 @@ export default function Admin() {
                 </button>
               </div>
             </div>
+
+            <dl className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
+              {[
+                { k: a.counters.visits, v: stats ? String(stats.visits) : '—', note: a.counters.visitsNote },
+                {
+                  k: a.counters.formStarts,
+                  v: stats ? String(stats.form_starts) : '—',
+                  note: stats ? `${stats.form_start_rate}% ${a.counters.formStartsNote}` : a.counters.formStartsNote,
+                },
+                { k: a.counters.submissions, v: stats ? String(stats.submissions) : '—', note: a.counters.submissionsNote },
+                { k: a.counters.conversion, v: stats ? `${stats.conversion_rate}%` : '—', note: a.counters.conversionNote },
+              ].map((s) => (
+                <div key={s.k} className="min-w-0 rounded-[16px] border border-border bg-card p-5 shadow-sm">
+                  <dt className="eyebrow text-muted-foreground">{s.k}</dt>
+                  <dd className="mt-2 font-mono text-[28px] font-bold leading-none md:text-[34px]">{s.v}</dd>
+                  <dd className="mt-2 text-[13px] text-muted-foreground">{s.note}</dd>
+                </div>
+              ))}
+            </dl>
+            {statsError && (
+              <p className="mt-3 text-sm text-destructive" role="alert">
+                {a.error}
+              </p>
+            )}
 
             <div className="mt-8 overflow-hidden rounded-[16px] border border-border bg-card shadow-sm">
               {state === 'loading' && items.length === 0 && (

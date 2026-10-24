@@ -2,7 +2,15 @@ import { createClient } from '@metagptx/web-sdk';
 
 export const client = createClient();
 
-export type PlanId = 'pilot' | 'lab_pilot' | 'unsure';
+export type PlanId = 'student' | 'lab' | 'team';
+
+export interface FunnelStats {
+  visits: number;
+  form_starts: number;
+  submissions: number;
+  conversion_rate: number;
+  form_start_rate: number;
+}
 export type RequestStatus = 'new' | 'in_review' | 'done' | 'declined';
 
 /** Mirrors the backend repro_requests contract. */

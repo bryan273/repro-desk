@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/v1/entities/repro_requests", tags=["repro_requests"])
 
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
-ALLOWED_PLANS = {"pilot", "lab_pilot", "unsure"}
+ALLOWED_PLANS = {"student", "lab", "team"}
 ALLOWED_LANGS = {"en", "zh"}
 
 
@@ -28,7 +28,7 @@ class Repro_requestsData(BaseModel):
     claim: str = Field(..., min_length=5, max_length=4000)
     email: str = Field(..., max_length=254)
     language: Optional[str] = "en"
-    plan: Optional[str] = "pilot"
+    plan: Optional[str] = "student"
 
     @field_validator("paper_link")
     @classmethod
@@ -88,7 +88,7 @@ async def create_repro_request(data: Repro_requestsData, db: AsyncSession = Depe
     """Public endpoint: save a reproduction request. Never returns other submissions."""
     payload = data.model_dump()
     payload["language"] = payload.get("language") if payload.get("language") in ALLOWED_LANGS else "en"
-    payload["plan"] = payload.get("plan") if payload.get("plan") in ALLOWED_PLANS else "pilot"
+    payload["plan"] = payload.get("plan") if payload.get("plan") in ALLOWED_PLANS else "student"
     payload["status"] = "new"
     try:
         result = await Repro_requestsService(db).create(payload)

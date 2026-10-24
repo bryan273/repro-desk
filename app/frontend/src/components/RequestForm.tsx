@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { CheckCircle2, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { client, errorMessage, type PlanId, type ReproRequestInput } from '@/lib/client';
+import { trackOnce } from '@/lib/track';
 
 type Field = 'paper_link' | 'claim' | 'email';
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -87,7 +88,12 @@ export default function RequestForm({ plan, onPlanChange }: Props) {
     ) : null;
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="rounded-[16px] bg-[hsl(60_10%_10%)] p-6 text-white shadow-2xl md:p-10">
+    <form
+      onSubmit={handleSubmit}
+      onFocusCapture={() => trackOnce('form_start', lang)}
+      noValidate
+      className="min-w-0 rounded-[16px] bg-[hsl(60_10%_10%)] p-5 text-white shadow-2xl ring-1 ring-white/10 sm:p-6 md:p-10"
+    >
       <div className="space-y-6">
         <div>
           <label htmlFor="paper_link" className="block font-medium">
