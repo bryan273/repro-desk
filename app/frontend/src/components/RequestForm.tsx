@@ -18,7 +18,7 @@ interface Props {
 }
 
 const inputCls =
-  'w-full rounded-[12px] border border-white/15 bg-white/[0.06] px-4 text-[16px] text-white placeholder:text-white/40 transition-colors duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring';
+  'w-full rounded-[12px] border border-border bg-background px-4 text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-colors duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-card';
 
 export default function RequestForm({ plan, onPlanChange }: Props) {
   const { t, lang } = useLanguage();
@@ -68,12 +68,12 @@ export default function RequestForm({ plan, onPlanChange }: Props) {
 
   if (successId !== null) {
     return (
-      <div className="rounded-[16px] bg-[hsl(60_10%_10%)] p-8 text-white shadow-2xl md:p-10" role="status" aria-live="polite">
-        <CheckCircle2 className="h-10 w-10 text-primary" aria-hidden="true" />
-        <h3 className="mt-5 text-2xl font-medium">{f.successTitle}</h3>
-        <p className="mt-3 text-white/75">{f.successBody}</p>
+      <div className="rounded-[16px] border border-border bg-card p-6 shadow-sm md:p-8" role="status" aria-live="polite">
+        <CheckCircle2 className="h-9 w-9 text-success" aria-hidden="true" />
+        <h3 className="mt-4 text-2xl font-extrabold tracking-[-0.03em]">{f.successTitle}</h3>
+        <p className="mt-3 text-muted-foreground">{f.successBody}</p>
         <p className="mt-6 font-mono text-3xl font-bold">RQ-{String(successId).padStart(4, '0')}</p>
-        <button type="button" onClick={() => setSuccessId(null)} className="btn-ghost mt-8 border border-white/25 px-6 text-white hover:bg-white/10">
+        <button type="button" onClick={() => setSuccessId(null)} className="btn-ghost mt-8 border border-border hover:bg-muted">
           {f.another}
         </button>
       </div>
@@ -82,7 +82,7 @@ export default function RequestForm({ plan, onPlanChange }: Props) {
 
   const fieldErr = (k: Field) =>
     errors[k] ? (
-      <p id={`${k}-err`} className="mt-2 text-sm text-[hsl(0_85%_75%)]">
+      <p id={`${k}-err`} className="mt-2 text-[13px] text-destructive">
         {errors[k]}
       </p>
     ) : null;
@@ -92,14 +92,14 @@ export default function RequestForm({ plan, onPlanChange }: Props) {
       onSubmit={handleSubmit}
       onFocusCapture={() => trackOnce('form_start', lang)}
       noValidate
-      className="min-w-0 rounded-[16px] bg-[hsl(60_10%_10%)] p-5 text-white shadow-2xl ring-1 ring-white/10 sm:p-6 md:p-10"
+      className="min-w-0 rounded-[16px] border border-border bg-card p-5 shadow-sm sm:p-7 md:p-8"
     >
-      <div className="space-y-6">
+      <div className="space-y-5">
         <div>
-          <label htmlFor="paper_link" className="block font-medium">
+          <label htmlFor="paper_link" className="block text-[14px] font-semibold">
             {f.paper}
           </label>
-          <p className="mt-1 text-sm text-white/60">{f.paperHint}</p>
+          <p className="mt-1 text-[13px] text-muted-foreground">{f.paperHint}</p>
           <input
             id="paper_link"
             type="text"
@@ -110,15 +110,15 @@ export default function RequestForm({ plan, onPlanChange }: Props) {
             placeholder={f.paperPh}
             aria-invalid={!!errors.paper_link}
             aria-describedby={errors.paper_link ? 'paper_link-err' : undefined}
-            className={`${inputCls} mt-3 h-12`}
+            className={`${inputCls} mt-2.5 h-11`}
           />
           {fieldErr('paper_link')}
         </div>
         <div>
-          <label htmlFor="claim" className="block font-medium">
+          <label htmlFor="claim" className="block text-[14px] font-semibold">
             {f.claim}
           </label>
-          <p className="mt-1 text-sm text-white/60">{f.claimHint}</p>
+          <p className="mt-1 text-[13px] text-muted-foreground">{f.claimHint}</p>
           <textarea
             id="claim"
             rows={3}
@@ -128,13 +128,13 @@ export default function RequestForm({ plan, onPlanChange }: Props) {
             placeholder={f.claimPh}
             aria-invalid={!!errors.claim}
             aria-describedby={errors.claim ? 'claim-err' : undefined}
-            className={`${inputCls} mt-3 resize-y py-3`}
+            className={`${inputCls} mt-2.5 resize-y py-3`}
           />
           {fieldErr('claim')}
         </div>
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-2">
           <div>
-            <label htmlFor="email" className="block font-medium">
+            <label htmlFor="email" className="block text-[14px] font-semibold">
               {f.email}
             </label>
             <input
@@ -146,20 +146,15 @@ export default function RequestForm({ plan, onPlanChange }: Props) {
               placeholder={f.emailPh}
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? 'email-err' : undefined}
-              className={`${inputCls} mt-3 h-12`}
+              className={`${inputCls} mt-2.5 h-11`}
             />
             {fieldErr('email')}
           </div>
           <div>
-            <label htmlFor="plan" className="block font-medium">
+            <label htmlFor="plan" className="block text-[14px] font-semibold">
               {f.plan}
             </label>
-            <select
-              id="plan"
-              value={plan}
-              onChange={(e) => onPlanChange(e.target.value as PlanId)}
-              className={`${inputCls} mt-3 h-12 [&>option]:text-foreground`}
-            >
+            <select id="plan" value={plan} onChange={(e) => onPlanChange(e.target.value as PlanId)} className={`${inputCls} mt-2.5 h-11`}>
               {t.pricing.plans.map((p) => (
                 <option key={p.id} value={p.id}>
                   {p.name} · {p.price}
@@ -170,13 +165,13 @@ export default function RequestForm({ plan, onPlanChange }: Props) {
         </div>
       </div>
       {submitError && (
-        <p className="mt-6 rounded-[12px] bg-[hsl(0_72%_51%/0.15)] px-4 py-3 text-sm text-[hsl(0_85%_80%)]" role="alert">
+        <p className="mt-5 rounded-[12px] bg-destructive/10 px-4 py-3 text-[13px] text-destructive" role="alert">
           {submitError}
         </p>
       )}
-      <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-white/60">{f.privacy}</p>
-        <button type="submit" disabled={submitting} className="btn-primary min-w-[180px]">
+      <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-[13px] text-muted-foreground">{f.privacy}</p>
+        <button type="submit" disabled={submitting} className="btn-primary min-w-[170px]">
           {submitting && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
           {submitting ? f.sending : f.submit}
         </button>

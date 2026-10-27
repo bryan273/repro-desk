@@ -8,13 +8,12 @@ interface ThemeValue {
 }
 
 const ThemeContext = createContext<ThemeValue | null>(null);
-const STORAGE_KEY = 'repro-desk-theme';
+const STORAGE_KEY = 'repro.theme2';
 
+/** Light first; dark only when the user chose it (shared Repro Suite key). */
 function initialTheme(): Theme {
   if (typeof window === 'undefined') return 'light';
-  const saved = window.localStorage.getItem(STORAGE_KEY);
-  if (saved === 'light' || saved === 'dark') return saved;
-  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return window.localStorage.getItem(STORAGE_KEY) === 'dark' ? 'dark' : 'light';
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {

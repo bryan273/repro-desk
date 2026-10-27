@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ArrowLeft, ExternalLink, Loader2, LogOut, RefreshCw, UserRound } from 'lucide-react';
 import { toast } from 'sonner';
-import { LangToggle, ThemeToggle, Wordmark } from '@/components/SiteHeader';
+import AppShell from '@/components/AppShell';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { client, errorMessage, type FunnelStats, type ReproRequest, type RequestStatus } from '@/lib/client';
 
@@ -96,7 +96,7 @@ export default function Admin() {
   const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   const Notice = ({ title, body, action }: { title: string; body: string; action?: React.ReactNode }) => (
-    <div className="mx-auto mt-16 max-w-[520px] rounded-[16px] border border-border bg-card p-10 text-center shadow-md">
+    <div className="mx-auto mt-12 max-w-[520px] rounded-[16px] border border-border bg-card p-8 text-center shadow-sm">
       <UserRound className="mx-auto h-10 w-10 text-muted-foreground" aria-hidden="true" />
       <h2 className="mt-5 text-2xl font-medium">{title}</h2>
       <p className="mt-3 text-muted-foreground">{body}</p>
@@ -105,35 +105,28 @@ export default function Admin() {
   );
 
   return (
-    <div className="min-h-screen overflow-x-clip bg-muted/40">
-      <header className="border-b border-border bg-background">
-        <div className="mx-auto flex h-[72px] max-w-[1320px] items-center justify-between gap-4 px-6 lg:px-10">
-          <div className="flex items-center gap-6">
-            <Wordmark />
-            <a href="/" className="hidden items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground sm:inline-flex">
+    <AppShell>
+      <div className="min-w-0 overflow-x-clip">
+        <div className="border-b border-border bg-card">
+          <div className="mx-auto flex min-h-[56px] max-w-[1180px] flex-wrap items-center justify-between gap-2 px-4 py-2 sm:px-6 lg:px-10">
+            <a href="/" className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-muted-foreground transition-colors hover:text-foreground">
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               {a.back}
             </a>
-          </div>
-          <div className="flex items-center gap-1 sm:gap-2">
-            <LangToggle />
-            <ThemeToggle />
             {auth === 'authenticated' && (
               <button
                 type="button"
                 onClick={() => client.auth.logout()}
-                aria-label={a.logout}
-                title={a.logout}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full hover:bg-muted"
+                className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border px-4 text-[13px] font-semibold transition-colors hover:bg-muted"
               >
-                <LogOut className="h-5 w-5" />
+                <LogOut className="h-4 w-4" aria-hidden="true" />
+                {a.logout}
               </button>
             )}
           </div>
         </div>
-      </header>
 
-      <main className="mx-auto max-w-[1320px] px-6 py-10 lg:px-10">
+        <main className="mx-auto max-w-[1180px] px-4 py-8 sm:px-6 lg:px-10">
         {auth === 'loading' && (
           <p className="mt-16 flex items-center justify-center gap-2 text-muted-foreground">
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> {a.loading}
@@ -158,7 +151,7 @@ export default function Admin() {
           <>
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
-                <h1 className="text-[32px] font-medium tracking-tight md:text-[40px]">{a.title}</h1>
+                <h1 className="text-[28px] font-extrabold tracking-[-0.035em] md:text-[36px]">{a.title}</h1>
                 <p className="mt-2 text-muted-foreground">
                   {a.subtitle} <span className="font-mono">{total}</span> {a.total}
                 </p>
@@ -317,7 +310,8 @@ export default function Admin() {
             )}
           </>
         )}
-      </main>
-    </div>
+        </main>
+      </div>
+    </AppShell>
   );
 }

@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,68 +7,78 @@
 @layer base {
   :root {
     color-scheme: light;
-    --background: 0 0% 100%;
-    --foreground: 60 13% 6%;
+    /* #FBFBFD / #FFFFFF / #F3F3F6 */
+    --background: 240 33% 99%;
     --card: 0 0% 100%;
-    --card-foreground: 60 13% 6%;
     --popover: 0 0% 100%;
-    --popover-foreground: 60 13% 6%;
-    --primary: 50 90% 80%;
-    --primary-foreground: 60 13% 6%;
-    --secondary: 60 13% 95%;
-    --secondary-foreground: 60 13% 6%;
-    --muted: 60 13% 95%;
-    --muted-foreground: 60 6% 34%;
-    --accent: 70 12% 14%;
-    --accent-foreground: 60 13% 95%;
-    --destructive: 0 72% 51%;
+    --muted: 240 14% 96%;
+    --secondary: 240 14% 96%;
+    /* #1D1D1F / #5C5C66 */
+    --foreground: 240 3% 12%;
+    --card-foreground: 240 3% 12%;
+    --popover-foreground: 240 3% 12%;
+    --secondary-foreground: 240 3% 12%;
+    --muted-foreground: 240 5% 38%;
+    /* #E4E4EA */
+    --border: 240 13% 91%;
+    --input: 240 13% 91%;
+    /* accent #2B59FF, tint #ECF0FF */
+    --primary: 227 100% 58%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 227 100% 96%;
+    --accent-foreground: 227 100% 58%;
+    --ring: 227 100% 58%;
+    /* #15803D / #B45309 / #C62828 */
+    --success: 142 72% 29%;
+    --warning: 26 90% 37%;
+    --destructive: 0 66% 47%;
     --destructive-foreground: 0 0% 100%;
-    --border: 60 6% 88%;
-    --input: 60 6% 90%;
-    --ring: 50 90% 80%;
     --radius: 16px;
-    --font-sans: 'Roboto', ui-sans-serif, system-ui, sans-serif;
-    --font-serif: 'Libre Caslon Text', ui-serif, Georgia, serif;
-    --font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    --shadow-2xs: 0 1px 2px 0 hsl(60 13% 6% / 0.04);
-    --shadow-xs: 0 1px 3px 0 hsl(60 13% 6% / 0.06);
-    --shadow-sm: 0 2px 8px 0 hsl(60 13% 6% / 0.06);
-    --shadow: 0 4px 16px -2px hsl(60 13% 6% / 0.08);
-    --shadow-md: 0 8px 24px 0 hsl(60 13% 6% / 0.08);
-    --shadow-lg: 0 16px 28px 0 hsl(60 13% 6% / 0.10);
-    --shadow-xl: 0 10px 50px 20px hsl(60 13% 6% / 0.12);
-    --shadow-2xl: 0 24px 60px 0 hsl(60 13% 6% / 0.18);
+    --shadow-2xs: 0 1px 2px rgba(16, 24, 40, 0.04);
+    --shadow-xs: 0 1px 3px rgba(16, 24, 40, 0.05);
+    --shadow-sm: 0 8px 24px rgba(16, 24, 40, 0.06);
+    --shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
+    --shadow-md: 0 12px 32px rgba(16, 24, 40, 0.08);
+    --shadow-lg: 0 16px 40px rgba(16, 24, 40, 0.1);
+    --shadow-xl: 0 24px 56px rgba(16, 24, 40, 0.12);
+    --shadow-2xl: 0 32px 72px rgba(16, 24, 40, 0.16);
   }
 
   .dark {
     color-scheme: dark;
-    --background: 60 13% 6%;
-    --foreground: 60 13% 95%;
-    --card: 60 10% 10%;
-    --card-foreground: 60 13% 95%;
-    --popover: 60 10% 10%;
-    --popover-foreground: 60 13% 95%;
-    --primary: 50 90% 80%;
-    --primary-foreground: 60 13% 6%;
-    --secondary: 60 8% 14%;
-    --secondary-foreground: 60 13% 95%;
-    --muted: 60 8% 14%;
-    --muted-foreground: 60 6% 64%;
-    --accent: 70 10% 20%;
-    --accent-foreground: 60 13% 95%;
-    --destructive: 0 62% 45%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 60 6% 20%;
-    --input: 60 6% 20%;
-    --ring: 50 90% 80%;
-    --shadow-2xs: 0 1px 2px 0 hsl(0 0% 0% / 0.20);
-    --shadow-xs: 0 1px 3px 0 hsl(0 0% 0% / 0.30);
-    --shadow-sm: 0 2px 8px 0 hsl(0 0% 0% / 0.30);
-    --shadow: 0 4px 16px -2px hsl(0 0% 0% / 0.40);
-    --shadow-md: 0 8px 24px 0 hsl(0 0% 0% / 0.40);
-    --shadow-lg: 0 16px 28px 0 hsl(0 0% 0% / 0.50);
-    --shadow-xl: 0 10px 50px 20px hsl(0 0% 0% / 0.55);
-    --shadow-2xl: 0 24px 60px 0 hsl(0 0% 0% / 0.60);
+    /* #0B0B0E / #151519 / #1C1C22 */
+    --background: 240 12% 5%;
+    --card: 240 9% 9%;
+    --popover: 240 9% 9%;
+    --muted: 240 10% 12%;
+    --secondary: 240 10% 12%;
+    /* #F4F4F6 / #ADADB8 */
+    --foreground: 240 10% 96%;
+    --card-foreground: 240 10% 96%;
+    --popover-foreground: 240 10% 96%;
+    --secondary-foreground: 240 10% 96%;
+    --muted-foreground: 240 7% 70%;
+    /* #2A2A31 */
+    --border: 240 8% 18%;
+    --input: 240 8% 18%;
+    /* accent #7B96FF, tint #1B2146 */
+    --primary: 228 100% 74%;
+    --primary-foreground: 240 12% 5%;
+    --accent: 232 44% 19%;
+    --accent-foreground: 228 100% 74%;
+    --ring: 228 100% 74%;
+    --success: 142 60% 55%;
+    --warning: 38 90% 60%;
+    --destructive: 0 75% 65%;
+    --destructive-foreground: 240 12% 5%;
+    --shadow-2xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.35);
+    --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+    --shadow-xl: 0 24px 56px rgba(0, 0, 0, 0.5);
+    --shadow-2xl: 0 32px 72px rgba(0, 0, 0, 0.55);
   }
 }
 
@@ -82,23 +90,23 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background font-sans text-foreground antialiased;
   }
   :focus-visible {
-    outline: 2px solid hsl(var(--foreground));
+    outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
   }
 }
 
 @layer components {
   .eyebrow {
-    @apply text-[13px] font-medium uppercase tracking-[0.08em];
+    @apply text-[12px] font-semibold uppercase tracking-[0.08em];
   }
   .btn-primary {
-    @apply inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-base font-medium text-primary-foreground transition-colors duration-200 hover:bg-[hsl(50_90%_72%)] active:bg-[hsl(50_90%_66%)] disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-full bg-primary px-6 text-[15px] font-semibold text-primary-foreground transition-colors duration-200 hover:bg-primary/90 active:bg-primary/80 disabled:cursor-not-allowed disabled:opacity-60;
   }
   .btn-ghost {
-    @apply inline-flex h-12 items-center justify-center gap-2 rounded-full px-5 text-base font-medium transition-colors duration-200;
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-[15px] font-semibold transition-colors duration-200;
   }
 }
 
