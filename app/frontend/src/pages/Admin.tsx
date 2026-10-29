@@ -3,12 +3,15 @@ import { ArrowLeft, ExternalLink, Loader2, LogOut, RefreshCw, UserRound } from '
 import { toast } from 'sonner';
 import AppShell from '@/components/AppShell';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { client, errorMessage, type FunnelStats, type ReproRequest, type RequestStatus } from '@/lib/client';
+import { errorMessage, type FunnelStats, type ReproRequest, type RequestStatus } from '@/lib/client';
+import { suiteCall } from '@/lib/suiteData';
 
 type AuthState = 'loading' | 'authenticated' | 'anonymous';
 type LoadState = 'idle' | 'loading' | 'ready' | 'error' | 'forbidden';
 
 const PAGE_SIZE = 25;
+const TOKEN_KEY = 'rd-admin';
+const getToken = () => { try { return sessionStorage.getItem(TOKEN_KEY) || ''; } catch { return ''; } };
 const STATUSES: RequestStatus[] = ['new', 'in_review', 'done', 'declined'];
 
 function linkHref(link: string): string {
@@ -31,16 +34,13 @@ export default function Admin() {
   const [statsError, setStatsError] = useState(false);
 
   useEffect(() => {
-    client.auth
-      .me()
-      .then((res) => setAuth(res?.data ? 'authenticated' : 'anonymous'))
-      .catch(() => setAuth('anonymous'));
+    setAuth(getToken() ? 'authenticated' : 'anonymous');
   }, []);
 
   const loadStats = useCallback(async () => {
     try {
-      const res = await client.apiCall.invoke({ url: '/api/v1/entities/site_events/stats', method: 'GET', data: {} });
-      setStats(res.data as FunnelStats);
+      const res = await suiteCall<{ visits: number; form_starts: number; submissions: number; conversion_rate: number; form_start_rate: number }>({ op: 'admin_stats' }, getToken());
+      setStats(res as FunnelStats);
       setStatsError(false);
     } catch {
       setStatsError(true);
@@ -52,11 +52,9 @@ export default function Admin() {
     setError('');
     loadStats();
     try {
-      const data: Record<string, string | number> = { skip: page * PAGE_SIZE, limit: PAGE_SIZE };
-      if (filter) data.status = filter;
-      const res = await client.apiCall.invoke({ url: '/api/v1/entities/repro_requests', method: 'GET', data });
-      setItems(res.data?.items ?? []);
-      setTotal(res.data?.total ?? 0);
+      const res = await suiteCall<{ items: ReproRequest[]; total: number }>({ op: 'admin_list', skip: page * PAGE_SIZE, limit: PAGE_SIZE, status: filter || undefined }, getToken());
+      setItems(res.items ?? []);
+      setTotal(res.total ?? 0);
       setState('ready');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
@@ -80,7 +78,7 @@ export default function Admin() {
   const changeStatus = async (row: ReproRequest, status: RequestStatus) => {
     setSavingId(row.id);
     try {
-      await client.apiCall.invoke({ url: `/api/v1/entities/repro_requests/${row.id}`, method: 'PUT', data: { status } });
+      await suiteCall({ op: 'admin_update', id: row.id, status }, getToken());
       setItems((list) => list.map((r) => (r.id === row.id ? { ...r, status } : r)));
       toast.success(a.updated);
     } catch (e) {
@@ -116,7 +114,7 @@ export default function Admin() {
             {auth === 'authenticated' && (
               <button
                 type="button"
-                onClick={() => client.auth.logout()}
+                onClick={() => { try { sessionStorage.removeItem(TOKEN_KEY); } catch { /* ignore */ } setAuth('anonymous'); setState('idle'); }}
                 className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border px-4 text-[13px] font-semibold transition-colors hover:bg-muted"
               >
                 <LogOut className="h-4 w-4" aria-hidden="true" />
@@ -138,7 +136,7 @@ export default function Admin() {
             title={a.loginTitle}
             body={a.loginBody}
             action={
-              <button type="button" onClick={() => client.auth.toLogin()} className="btn-primary px-8">
+              <button type="button" onClick={() => { const t = window.prompt('Admin token'); if (t && t.trim()) { try { sessionStorage.setItem(TOKEN_KEY, t.trim()); } catch { /* ignore */ } setAuth('authenticated'); } }} className="btn-primary px-8">
                 {a.login}
               </button>
             }

@@ -1,4 +1,4 @@
-import { client } from './client';
+import { suiteCall } from './suiteData';
 
 type EventType = 'visit' | 'form_start';
 
@@ -22,7 +22,6 @@ export function trackOnce(type: EventType, language: string): void {
   } catch {
     return;
   }
-  client.entities.site_events
-    .create({ data: { event_type: type, session_id: sessionId(), language, path: window.location.pathname } })
+  suiteCall({ op: 'create', collection: 'site_events', data: { event_type: type, session_id: sessionId(), language, path: window.location.pathname } })
     .catch(() => sessionStorage.removeItem(key));
 }

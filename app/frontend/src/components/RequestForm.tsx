@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from 'react';
 import { CheckCircle2, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { client, errorMessage, type PlanId, type ReproRequestInput } from '@/lib/client';
+import { errorMessage, type PlanId, type ReproRequestInput } from '@/lib/client';
+import { suiteCall } from '@/lib/suiteData';
 import { trackOnce } from '@/lib/track';
 
 type Field = 'paper_link' | 'claim' | 'email';
@@ -51,8 +52,8 @@ export default function RequestForm({ plan, onPlanChange }: Props) {
       plan,
     };
     try {
-      const res = await client.entities.repro_requests.create({ data: payload });
-      setSuccessId(res.data?.id ?? null);
+      const res = await suiteCall<{ id: number }>({ op: 'create', collection: 'repro_requests', data: payload });
+      setSuccessId(res.id ?? null);
       setValues({ paper_link: '', claim: '', email: '' });
     } catch (err) {
       setSubmitError(`${f.errors.submit} (${errorMessage(err, 'error')})`);
