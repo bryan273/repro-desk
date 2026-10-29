@@ -34,7 +34,7 @@ const App = () => (
       <ThemeProvider>
         <LanguageProvider>
           <Toaster />
-          <BrowserRouter>
+          <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
             <AppRoutes />
           </BrowserRouter>
         </LanguageProvider>

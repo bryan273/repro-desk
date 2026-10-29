@@ -26,10 +26,10 @@ const en = {
     suiteTagline: 'part of Repro Suite',
     newTab: 'opens in a new tab',
     suite: [
-      { label: 'Paper Explainer', href: 'https://paper-explainer-aiid.vercel.app' },
-      { label: 'Paper Repro Agent', href: 'https://paper-repro-aiid.vercel.app/repro/index.html' },
-      { label: 'Benchmark', href: 'https://paper-repro-aiid.vercel.app/repro/bench.html' },
-      { label: 'All apps', href: 'https://repro-suite-hub-aiid.vercel.app' },
+      { label: 'Paper Explainer', href: 'https://bryan273.github.io/repro-suite/explainer' },
+      { label: 'Paper Repro Agent', href: 'https://bryan273.github.io/repro-suite/repro/index.html' },
+      { label: 'Benchmark', href: 'https://bryan273.github.io/repro-suite/repro/bench.html' },
+      { label: 'All apps', href: 'https://bryan273.github.io/repro-suite/hub' },
     ],
   },
   hero: {
@@ -302,10 +302,10 @@ const zh: Content = {
     suiteTagline: 'Repro Suite 成员',
     newTab: '在新标签页打开',
     suite: [
-      { label: '论文讲解 Paper Explainer', href: 'https://paper-explainer-aiid.vercel.app' },
-      { label: '论文复现智能体', href: 'https://paper-repro-aiid.vercel.app/repro/index.html' },
-      { label: '基准测试', href: 'https://paper-repro-aiid.vercel.app/repro/bench.html' },
-      { label: '全部应用', href: 'https://repro-suite-hub-aiid.vercel.app' },
+      { label: '论文讲解 Paper Explainer', href: 'https://bryan273.github.io/repro-suite/explainer' },
+      { label: '论文复现智能体', href: 'https://bryan273.github.io/repro-suite/repro/index.html' },
+      { label: '基准测试', href: 'https://bryan273.github.io/repro-suite/repro/bench.html' },
+      { label: '全部应用', href: 'https://bryan273.github.io/repro-suite/hub' },
     ],
   },
   hero: {
