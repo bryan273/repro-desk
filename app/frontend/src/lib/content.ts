@@ -26,10 +26,10 @@ const en = {
     suiteTagline: 'part of Repro Suite',
     newTab: 'opens in a new tab',
     suite: [
-      { label: 'Paper Explainer', href: 'https://paperexplainer-aiid.pub.atoms.world' },
-      { label: 'Paper Repro Agent', href: 'https://paperrepro-aiid.atoms.world/repro/index.html' },
-      { label: 'Benchmark', href: 'https://paperrepro-aiid.atoms.world/repro/bench.html' },
-      { label: 'All apps', href: 'https://reprosuite-aiid.atoms.world' },
+      { label: 'Paper Explainer', href: 'https://paper-explainer-aiid.vercel.app' },
+      { label: 'Paper Repro Agent', href: 'https://paper-repro-aiid.vercel.app/repro/index.html' },
+      { label: 'Benchmark', href: 'https://paper-repro-aiid.vercel.app/repro/bench.html' },
+      { label: 'All apps', href: 'https://repro-suite-hub-aiid.vercel.app' },
     ],
   },
   hero: {
@@ -302,10 +302,10 @@ const zh: Content = {
     suiteTagline: 'Repro Suite 成员',
     newTab: '在新标签页打开',
     suite: [
-      { label: '论文讲解 Paper Explainer', href: 'https://paperexplainer-aiid.pub.atoms.world' },
-      { label: '论文复现智能体', href: 'https://paperrepro-aiid.atoms.world/repro/index.html' },
-      { label: '基准测试', href: 'https://paperrepro-aiid.atoms.world/repro/bench.html' },
-      { label: '全部应用', href: 'https://reprosuite-aiid.atoms.world' },
+      { label: '论文讲解 Paper Explainer', href: 'https://paper-explainer-aiid.vercel.app' },
+      { label: '论文复现智能体', href: 'https://paper-repro-aiid.vercel.app/repro/index.html' },
+      { label: '基准测试', href: 'https://paper-repro-aiid.vercel.app/repro/bench.html' },
+      { label: '全部应用', href: 'https://repro-suite-hub-aiid.vercel.app' },
     ],
   },
   hero: {
