@@ -424,7 +424,7 @@ export default function Index() {
                 <ul className="mt-3 space-y-2">
                   {col.links.map((l) => (
                     <li key={l.href}>
-                      <a href={l.href} className="text-[14px] text-muted-foreground transition-colors duration-200 hover:text-foreground">
+                      <a href={l.href} className="inline-flex min-h-8 items-center text-[14px] text-muted-foreground transition-colors duration-200 hover:text-foreground">
                         {l.label}
                       </a>
                     </li>
