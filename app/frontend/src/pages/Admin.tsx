@@ -34,7 +34,7 @@ export default function Admin() {
   const [statsError, setStatsError] = useState(false);
 
   useEffect(() => {
-    setAuth(getToken() ? 'authenticated' : 'anonymous');
+    setAuth('authenticated');   // without a token the server answers a read-only preview (emails masked)
   }, []);
 
   const loadStats = useCallback(async () => {
@@ -111,7 +111,7 @@ export default function Admin() {
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               {a.back}
             </a>
-            {auth === 'authenticated' && (
+            {auth === 'authenticated' && getToken() && (
               <button
                 type="button"
                 onClick={() => { try { sessionStorage.removeItem(TOKEN_KEY); } catch { /* ignore */ } setAuth('anonymous'); setState('idle'); }}
@@ -147,6 +147,12 @@ export default function Admin() {
 
         {auth === 'authenticated' && state !== 'forbidden' && (
           <>
+            {!getToken() && (
+              <p className="mb-4 rounded-xl border border-border bg-muted px-4 py-3 text-[13px] text-muted-foreground">
+                Read-only preview: e-mail addresses are masked and statuses cannot be changed.{' '}
+                <button type="button" className="font-semibold text-primary underline-offset-4 hover:underline" onClick={() => { const t = window.prompt('Admin token'); if (t && t.trim()) { try { sessionStorage.setItem(TOKEN_KEY, t.trim()); } catch { /* ignore */ } load(); setAuth('authenticated'); } }}>Enter the admin token</button>
+              </p>
+            )}
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <h1 className="text-[28px] font-extrabold tracking-[-0.035em] md:text-[36px]">{a.title}</h1>
@@ -264,7 +270,7 @@ export default function Admin() {
                             <select
                               id={`status-${r.id}`}
                               value={r.status ?? 'new'}
-                              disabled={savingId === r.id}
+                              disabled={savingId === r.id || !getToken()}
                               onChange={(e) => changeStatus(r, e.target.value as RequestStatus)}
                               className="h-10 rounded-[10px] border border-input bg-background px-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-60"
                             >
