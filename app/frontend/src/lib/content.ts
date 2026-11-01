@@ -44,7 +44,6 @@ const en = {
     stats: [
       { value: 48, suffix: 'h', label: 'From request to report' },
       { value: 2, suffix: '', label: 'Full runs per claim, one from scratch' },
-      { value: 1, suffix: '', label: 'Human review on every report' },
     ],
   },
   fields: {
@@ -123,9 +122,8 @@ const en = {
       { prefix: '', value: 32, suffix: '', label: 'Papers in our benchmark' },
       { prefix: '', value: 6, suffix: '', label: 'AI models compared' },
       { prefix: '~', value: 8, suffix: ' in 10', label: 'Papers reproduced by the best model' },
-      { prefix: '~', value: 7, suffix: ' pts', label: 'Run-to-run noise on our 100-point index' },
     ],
-    caveat: 'That noise is why every claim is run twice and every report is read by a person.',
+    caveat: 'Every claim is run twice and every report is read by a person.',
     link: 'How we measure',
   },
   pricing: {
@@ -320,7 +318,6 @@ const zh: Content = {
     stats: [
       { value: 48, suffix: 'h', label: '从申请到交付报告' },
       { value: 2, suffix: '', label: '每个论断完整运行两次，其中一次从零开始' },
-      { value: 1, suffix: '', label: '每份报告都有人工审核' },
     ],
   },
   fields: {
@@ -397,7 +394,7 @@ const zh: Content = {
       { prefix: '约 ', value: 8, suffix: '/10', label: '最佳模型复现的论文比例' },
       { prefix: '约 ', value: 7, suffix: ' 分', label: '在 100 分指数上的运行间波动' },
     ],
-    caveat: '正因为存在波动，每个论断都会运行两次，每份报告都会经过人工阅读。',
+    caveat: '每个论断都会运行两次，每份报告都会经过人工阅读。',
     link: '我们如何测量',
   },
   pricing: {
