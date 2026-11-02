@@ -234,7 +234,7 @@ const en = {
     tagline: 'Fast, audited reproduction checks for the numbers research is built on.',
     cols: [
       { title: 'Service', links: [{ href: '#how', label: 'How it works' }, { href: '#report', label: 'Sample report' }, { href: '#pricing', label: 'Pricing' }] },
-      { title: 'Help', links: [{ href: '#faq', label: 'FAQ' }, { href: '#request', label: 'Request a check' }, { href: '/admin', label: 'Team login' }] },
+      { title: 'Help', links: [{ href: '#faq', label: 'FAQ' }, { href: '#request', label: 'Request a check' }, { href: `${import.meta.env.BASE_URL}admin`, label: 'Team login' }] },
     ],
     rights: 'All rights reserved.',
   },
@@ -481,7 +481,7 @@ const zh: Content = {
     tagline: '为科研所依赖的数字提供快速、可审计的复现检查。',
     cols: [
       { title: '服务', links: [{ href: '#how', label: '流程' }, { href: '#report', label: '报告示例' }, { href: '#pricing', label: '价格' }] },
-      { title: '帮助', links: [{ href: '#faq', label: '常见问题' }, { href: '#request', label: '申请复现检查' }, { href: '/admin', label: '团队登录' }] },
+      { title: '帮助', links: [{ href: '#faq', label: '常见问题' }, { href: '#request', label: '申请复现检查' }, { href: `${import.meta.env.BASE_URL}admin`, label: '团队登录' }] },
     ],
     rights: '保留所有权利。',
   },
