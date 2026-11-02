@@ -119,7 +119,7 @@ export default function Index() {
               <p className="hero-line eyebrow text-primary">{t.hero.eyebrow}</p>
               <h1 className="mt-4 text-[34px] font-extrabold leading-[1.06] tracking-[-0.035em] sm:text-[46px] xl:text-[56px]">
                 <span className="hero-line block">{t.hero.titleA}</span>
-                <span className="hero-line block text-muted-foreground">{t.hero.titleB}</span>
+                <span className="hero-line su-grad block">{t.hero.titleB}</span>
               </h1>
               <p className="hero-sub mt-5 max-w-[560px] text-[16px] leading-relaxed text-muted-foreground md:text-[17px]">{t.hero.body}</p>
               <div className="hero-cta mt-8 flex flex-wrap items-center gap-3">
