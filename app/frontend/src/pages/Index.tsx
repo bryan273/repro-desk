@@ -13,9 +13,9 @@ import { trackOnce } from '@/lib/track';
 gsap.registerPlugin(ScrollTrigger);
 
 const IMG = {
-  hero: 'https://mgx-backend-cdn.metadl.com/generate/images/1614411/2026-10-24/zay3e3ycalsq/hero-researcher.png',
-  bench: 'https://mgx-backend-cdn.metadl.com/generate/images/1614411/2026-10-24/zay3fiycalsa/report-bench.png',
-  team: 'https://mgx-backend-cdn.metadl.com/generate/images/1614411/2026-10-24/zay3fvycalrq/team-review.png',
+  hero: import.meta.env.BASE_URL + 'img/hero-researcher.webp',
+  bench: import.meta.env.BASE_URL + 'img/report-bench.webp',
+  team: import.meta.env.BASE_URL + 'img/team-review.webp',
 };
 
 const FLAG_ICON: Record<FlagLevel, { Icon: typeof Info; cls: string }> = {
