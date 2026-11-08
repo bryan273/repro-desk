@@ -10,7 +10,7 @@ interface ThemeValue {
 const ThemeContext = createContext<ThemeValue | null>(null);
 const STORAGE_KEY = 'repro.theme2';
 
-/** Light first; dark only when the user chose it (shared Repro Suite key). */
+/** Light first; dark only when the user chose it (shared Paperlit key). */
 function initialTheme(): Theme {
   if (typeof window === 'undefined') return 'light';
   return window.localStorage.getItem(STORAGE_KEY) === 'dark' ? 'dark' : 'light';
