@@ -22,8 +22,8 @@ const en = {
     overview: 'Overview',
     admin: 'Requests (admin)',
     groupDesk: 'Repro Desk',
-    groupSuite: 'Repro Suite',
-    suiteTagline: 'part of Repro Suite',
+    groupSuite: 'Paperlit',
+    suiteTagline: 'part of Paperlit',
     newTab: 'opens in a new tab',
     suite: [
       { label: 'Paper Explainer', href: 'https://bryan273.github.io/repro-suite/explainer' },
@@ -296,8 +296,8 @@ const zh: Content = {
     overview: '概览',
     admin: '申请列表（管理）',
     groupDesk: 'Repro Desk',
-    groupSuite: 'Repro Suite',
-    suiteTagline: 'Repro Suite 成员',
+    groupSuite: 'Paperlit',
+    suiteTagline: 'Paperlit 成员',
     newTab: '在新标签页打开',
     suite: [
       { label: '论文讲解 Paper Explainer', href: 'https://bryan273.github.io/repro-suite/explainer' },

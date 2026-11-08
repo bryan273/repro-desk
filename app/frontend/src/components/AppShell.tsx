@@ -67,7 +67,7 @@ export function ThemeToggle() {
   );
 }
 
-/** Shared Repro Suite layout: sticky top bar with the app links, the Paper Explainer link and the suite menu. */
+/** Shared Paperlit layout: sticky top bar with the app links, the Paper Explainer link and the suite menu. */
 export default function AppShell({ children }: { children: ReactNode }) {
   const { t, lang, setLang } = useLanguage();
   const { theme, toggle } = useTheme();
